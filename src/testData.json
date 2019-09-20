@@ -1,0 +1,39 @@
+{
+  "menuitemList": [
+    {
+      "route": "home",
+      "title": "Inicio",
+      "icon": "home",
+      "active": true,
+      "roles": []
+    },
+    {
+      "route": "providers",
+      "title": "Fornecedores",
+      "icon": "truck",
+      "active": false,
+      "roles": [2]
+    },
+    {
+      "route": "#",
+      "title": "Controle de Equipe",
+      "icon": "users",
+      "active": false,
+      "roles": [2]
+    },
+    {
+      "route": "#",
+      "title": "Orçamentos",
+      "icon": "money",
+      "active": false,
+      "roles": [2]
+    },
+    {
+      "route": "#",
+      "title": "Biblioteca",
+      "icon": "book",
+      "active": false,
+      "roles": []
+    }
+  ]
+}
