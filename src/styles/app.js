@@ -2,7 +2,7 @@ import styled from "styled-components";
 import colors from "../styles/colors"
 
 export const Page = styled.div`
-  margin-left: ${({ collapse }) => (collapse ? "70px" : "250px")};
+
   background-color: #f5f5f5;
   height: 100%;
   overflow: auto;

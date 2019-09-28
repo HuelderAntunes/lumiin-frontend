@@ -10,28 +10,28 @@
     {
       "route": "providers",
       "title": "Fornecedores",
-      "icon": "truck",
+      "icon": "rocket",
       "active": false,
       "roles": [2]
     },
     {
       "route": "#",
       "title": "Controle de Equipe",
-      "icon": "users",
+      "icon": "user",
       "active": false,
       "roles": [2]
     },
     {
       "route": "#",
-      "title": "Orçamentos",
-      "icon": "money",
+      "title": "OrÃ§amentos",
+      "icon": "bank",
       "active": false,
       "roles": [2]
     },
     {
       "route": "#",
       "title": "Biblioteca",
-      "icon": "book",
+      "icon": "file-search",
       "active": false,
       "roles": []
     }

@@ -1,10 +1,9 @@
-import styled from "styled-components";
-import colors from "../../styles/colors"
-
+import styled from 'styled-components'
+import colors from '../../styles/colors'
 
 export const Container = styled.aside`
   height: 100%;
-  width: ${({ collapse }) => (!collapse ? "240px" : "70px")};
+  width: ${({ collapse }) => (!collapse ? '240px' : '70px')};
   background: ${colors.secondary};
   color: ${colors.gray};
 
@@ -23,9 +22,9 @@ export const Container = styled.aside`
   }
 
   img {
-    width: ${({ collapse }) => (!collapse ? "250px" : "150px")};
+    width: ${({ collapse }) => (!collapse ? '250px' : '150px')};
   }
-`;
+`
 
 export const CollapseButton = styled.button`
   background-color: ${colors.secondary};
@@ -39,21 +38,21 @@ export const CollapseButton = styled.button`
   &:hover {
     color: ${colors.white};
   }
-`;
+`
 
 export const Brand = styled.img`
-  padding: 50px;
-  object-fit: scale-down;
-  height: 250px;
-`;
+  width: 64px;
+  padding: 5px;
+
+`
 
 export const Menu = styled.ul`
   list-style: none;
-`;
+`
 
 export const MenuItem = styled.li`
   padding: 10px;
-  font-weight: ${({ active }) => (active ? `bold` : "none")};
+  font-weight: ${({ active }) => (active ? `bold` : 'none')};
   color: ${colors.gray};
 
   span {
@@ -67,4 +66,4 @@ export const MenuItem = styled.li`
   a:hover {
     color: ${colors.primary};
   }
-`;
+`

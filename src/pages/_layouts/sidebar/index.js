@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Sidebar from '../../../components/Sidebar'
+import MenuCollapse from '../../../components/MenuCollapse'
 import { useSelector, useDispatch } from 'react-redux'
 import GlobalStyle from '../../../styles/global'
 import colors from '../../../styles/colors'
@@ -7,15 +8,20 @@ import Avatar from '../../../images/avatar/leo.png'
 import baseData from '../../../testData.json'
 import { Page, Profile, ProfileItem, LoadingContainer } from '../../../styles/app'
 import ExpandedButton from '../../../components/ExpandButton'
-import { Menu, Dropdown } from 'antd'
+import { Menu, Dropdown, Layout, Breadcrumb, Icon } from 'antd'
 import { withRouter, Link } from 'react-router-dom'
-
 import Loader from 'react-loader-spinner'
 import { signOut } from '../../../store/modules/auth/actions'
-function SidebarLayout (props) {
+import Logo from '../../../images/brand/logo.png'
+import { Brand } from '../../../components/Sidebar/styles'
+
+const { Header, Content, Footer, Sider } = Layout
+const { SubMenu } = Menu
+function
+SidebarLayout (props) {
   const sidebarState = useState(true)
   const profile = useSelector(state => state.user.profile)
-  const [collapse] = sidebarState
+  const [collapsed, setCollapsed] = sidebarState
   const dispatch = useDispatch()
 
   function handleSignOut () {
@@ -38,21 +44,33 @@ function SidebarLayout (props) {
     </Menu>
   )
   const nameSplit = profile.name.split(/\s+/g)
+
+  const onCollapse = collapsed => {
+    setCollapsed(collapsed)
+  }
+
   return (
     <React.Fragment>
-
-      <Sidebar menuItemList={baseData.menuitemList} state={sidebarState} match={props.match} />
-      <Profile>
-        <Dropdown overlay={menu}>
-          <div className='ant-dropdown-link'>
-            <ExpandedButton image={profile.avatar.url} text={`${nameSplit[0]} ${nameSplit.length > 1 ? (nameSplit[1][0] + '.') : ''}`} />
+      <Layout style={{ minHeight: '100vh' }}>
+        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+          <div style={{ textAlign: 'center' }}>
+            <Brand src={Logo} className='brand-logo' alt='Brand Logo' />
           </div>
-        </Dropdown>
-      </Profile>
-      <Page collapse={collapse}>
-        { props.children }
-      </Page>
-
+          <MenuCollapse menuItemList={baseData.menuitemList} state={sidebarState} match={props.match} />
+        </Sider>
+        <Layout>
+          <Profile>
+            <Dropdown overlay={menu}>
+              <div className='ant-dropdown-link'>
+                <ExpandedButton image={profile.avatar.url} text={`${nameSplit[0]} ${nameSplit.length > 1 ? (nameSplit[1][0] + '.') : ''}`} />
+              </div>
+            </Dropdown>
+          </Profile>
+          <Page collapse={collapsed}>
+            { props.children }
+          </Page>
+        </Layout>
+      </Layout>
       <GlobalStyle />
     </React.Fragment>
   )
