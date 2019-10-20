@@ -8,12 +8,12 @@ const { SubMenu } = Menu
 const MenuCollapse = function (props) {
   const profile = useSelector(state => state.user.profile)
   return (
-    <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
+    <Menu theme='dark' selectedKeys={[window.location.pathname.split('/').slice(-1).pop()]} mode='inline'>
 
       {props.menuItemList.map((menuItem, index) => {
         if (!menuItem.roles.includes(profile.role) && menuItem.roles.length > 0) { return }
         return (
-          <Menu.Item active={window.location.pathname.split('/').includes(menuItem.route)} key={index}>
+          <Menu.Item key={menuItem.route}>
             <Link to={`${props.match.path}/${menuItem.route}`}>
               <Icon type={menuItem.icon || 'link'} size='20' />
               <span>{menuItem.title}</span>

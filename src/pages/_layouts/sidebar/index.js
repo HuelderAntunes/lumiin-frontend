@@ -62,7 +62,7 @@ SidebarLayout (props) {
           <Profile>
             <Dropdown overlay={menu}>
               <div className='ant-dropdown-link'>
-                <ExpandedButton image={profile.avatar.url} text={`${nameSplit[0]} ${nameSplit.length > 1 ? (nameSplit[1][0] + '.') : ''}`} />
+                <ExpandedButton image={profile.avatar ? profile.avatar.url : null} text={`${nameSplit[0]} ${nameSplit.length > 1 ? (nameSplit[1][0] + '.') : ''}`} />
               </div>
             </Dropdown>
           </Profile>
