@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import colors from "../../styles/colors"
+import colors from "../../styles/colors";
 
 export const Container = styled.div`
   .ant-carousel .slick-slide {
@@ -8,6 +8,8 @@ export const Container = styled.div`
     line-height: 160px;
     overflow: hidden;
   }
+
+  overflow: hidden;
 
   .ant-carousel .slick-slide h3 {
     color: ${colors.primary};
