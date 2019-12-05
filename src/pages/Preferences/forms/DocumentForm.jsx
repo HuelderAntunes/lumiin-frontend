@@ -69,7 +69,7 @@ const DocumentForm = props => {
     <div>
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col span={8}>
+          <Col span={10}>
             {forms.map(form => handleForm(form))}
             <Row type="flex" justify="end">
               <Button
