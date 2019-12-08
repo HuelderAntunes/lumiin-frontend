@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import { Form, message, Input, Icon, Button, Row, Col, Upload } from 'antd'
+import api from '../../../services/api'
+import { useSelector } from 'react-redux'
 const { Dragger } = Upload
 
 const DocumentForm = props => {
+  const [fileName, setFileName] = useState('')
+  const { token } = useSelector(state => state.auth)
   const { getFieldDecorator } = props.form
   const [forms, setForms] = useState([
     { label: 'Documento', value: '', type: 'form' },
@@ -12,7 +16,20 @@ const DocumentForm = props => {
     e.preventDefault()
     props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values)
+        console.log('Received values of form: ', values.document, fileName)
+
+        const authStr = 'Bearer ' + token
+
+        const body = {
+          document: values.document,
+          photo: fileName
+        }
+
+        const config = {
+          headers: { Authorization: authStr }
+        }
+
+        api.post('/documents', body, config).then(res => console.log(res))
       }
     })
   }
@@ -46,6 +63,7 @@ const DocumentForm = props => {
             }
             if (status === 'done') {
               message.success(`${info.file.name} file uploaded successfully`)
+              setFileName(info.file.name)
             } else if (status === 'error') {
               message.error(`${info.file.name} file uploaded failed.`)
             }
@@ -87,6 +105,11 @@ const DocumentForm = props => {
                 Adicionar novo documento
               </Button>
             </Row>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Salvar
+              </Button>
+            </Form.Item>
           </Col>
         </Row>
       </Form>
