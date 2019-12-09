@@ -16,7 +16,13 @@ const DocumentForm = props => {
     e.preventDefault()
     props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values.document, fileName)
+        console.log(
+          'Received values of form: ',
+          values.document,
+          fileName,
+          typeof values.document,
+          typeof fileName
+        )
 
         const authStr = 'Bearer ' + token
 
@@ -29,7 +35,10 @@ const DocumentForm = props => {
           headers: { Authorization: authStr }
         }
 
-        api.post('/documents', body, config).then(res => console.log(res))
+        api
+          .post('/documents', body, config)
+          .then(res => console.log(res))
+          .catch(e => console.log(e))
       }
     })
   }
