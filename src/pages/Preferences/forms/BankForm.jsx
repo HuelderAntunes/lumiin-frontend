@@ -27,15 +27,8 @@ const BankForm = props => {
     props.form.validateFields((err, values) => {
       if (!err) {
         const { account, bank, type, name, document, agency } = values
-        console.log({ account, bank, type, name, document, agency })
 
         const authStr = 'Bearer ' + token
-        //cpf: '48371574835',
-        //holder: 'test',
-        //account: 'test',
-        //bank_branch: 'test',
-        //bank: 'nubank'
-
         const body = {
           cpf: document,
           holder: name,
