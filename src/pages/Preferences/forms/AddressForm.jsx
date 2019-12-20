@@ -39,7 +39,7 @@ const AddressForm = props => {
                 initialValue: '',
                 rules: [
                   {
-                    required: true,
+                    required: false,
                     message: 'Selecione o páis.',
                     whitespace: false
                   }
