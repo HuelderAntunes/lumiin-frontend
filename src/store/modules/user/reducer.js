@@ -6,7 +6,6 @@ export default function user (state = INITIAL_STATE, action) {
   switch (action.type) {
     case '@auth/SIGN_IN_SUCCESS':
       state = { ...state, profile: action.payload.user }
-
       return state
     case '@auth/SIGN_OUT':
       state = { ...state, profile: null }
