@@ -27,7 +27,6 @@ const ContactForm = props => {
     e.preventDefault()
     props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values)
         const { phone, cellphone, comercialMail } = values
 
         const authStr = 'Bearer ' + token
@@ -36,8 +35,6 @@ const ContactForm = props => {
           phone: Number(phone),
           cellphone: Number(cellphone)
         }
-
-        console.log({ body })
 
         const config = {
           headers: { Authorization: authStr }

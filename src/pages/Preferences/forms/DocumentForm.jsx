@@ -16,14 +16,6 @@ const DocumentForm = props => {
     e.preventDefault()
     props.form.validateFields((err, values) => {
       if (!err) {
-        console.log(
-          'Received values of form: ',
-          values.document,
-          fileName,
-          typeof values.document,
-          typeof fileName
-        )
-
         const authStr = 'Bearer ' + token
 
         const body = {
@@ -68,7 +60,7 @@ const DocumentForm = props => {
           onChange={info => {
             const { status } = info.file
             if (status !== 'uploading') {
-              console.log(info.file, info.fileList)
+              message.info(`${info.file} uploading`)
             }
             if (status === 'done') {
               message.success(`${info.file.name} file uploaded successfully`)

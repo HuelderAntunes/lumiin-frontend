@@ -1,9 +1,9 @@
-import React from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
-import Dashboard from "../pages/Dashboard";
+import React from 'react'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import Dashboard from '../pages/Dashboard'
 
-import Login from "../pages/Login";
-import Route from "./Route";
+import Login from '../pages/Login'
+import Route from './Route'
 
 function BaseRouter() {
   return (
@@ -14,7 +14,7 @@ function BaseRouter() {
         <Route exact path="/" component={Login} />
       </Switch>
     </Router>
-  );
+  )
 }
 
-export default BaseRouter;
+export default BaseRouter
