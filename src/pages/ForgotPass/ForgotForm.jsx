@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom'
 
 function NormalForgotForm(props) {
   const [isValid, setIsValid] = useState(false)
+  const [step, setStep] = useState(1)
   const { isFieldTouched, getFieldError, validateFields } = props.form
   const { getFieldDecorator } = props.form
   const dispatch = useDispatch()
@@ -17,8 +18,10 @@ function NormalForgotForm(props) {
     e.preventDefault()
     validateFields((err, values) => {
       if (!err) {
-        const { email, password } = values
-        dispatch(signInRequest(email, password, props.history))
+        setStep(step + 1)
+        if (step >= 3) return setStep(1)
+        const { email, oldPassword, password, confirmPassword } = values
+        console.log(email, oldPassword, password, confirmPassword)
       }
     })
   }
@@ -26,9 +29,64 @@ function NormalForgotForm(props) {
   const handleValidCode = e => {
     setIsValid(e.target.value.length > 3)
   }
-  return (
-    <div>
-      {isValid ? (
+
+  const renderForms = () => {
+    if (step === 1) {
+      return (
+        <Form onSubmit={handleSubmit}>
+          <Form.Item label="E-mail">
+            {getFieldDecorator('email', {
+              initialValue: '',
+              rules: [
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!'
+                },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!'
+                }
+              ]
+            })(<Input placeholder="Email to send code" />)}
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
+              Enviar email
+            </Button>
+          </Form.Item>
+        </Form>
+      )
+    }
+    if (step === 2) {
+      return (
+        <Form onSubmit={handleSubmit}>
+          <Form.Item label="Código de confirmação">
+            {getFieldDecorator('confirmCode', {
+              initialValue: '',
+              rules: [
+                {
+                  required: true,
+                  message: 'Please provide a code'
+                }
+              ]
+            })(
+              <Input
+                placeholder="Confirmation Code"
+                onChange={handleValidCode}
+              />
+            )}
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
+              Confirmar código
+            </Button>
+          </Form.Item>
+        </Form>
+      )
+    }
+
+    if (step === 3) {
+      return (
         <Form onSubmit={handleSubmit} style={{ maxWidth: '300px' }}>
           <Form.Item
             label="Old Password"
@@ -93,11 +151,10 @@ function NormalForgotForm(props) {
             </Button>
           </Form.Item>
         </Form>
-      ) : (
-        <Input placeholder="Confirmation Code" onChange={handleValidCode} />
-      )}
-    </div>
-  )
+      )
+    }
+  }
+  return <div>{renderForms()}</div>
 }
 
 export default withRouter(
